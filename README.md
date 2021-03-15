@@ -1,3 +1,8 @@
 # COVID-19
-COVID-19 Drug Prediction
-To identify key gene expression pathways altered with infection of the novel coronavirus SARS-Cov-2, we performed the largest comparative genomic and transcriptomic analysis to date. We compared the novel pandemic coronavirus SARS-Cov-2 with SARS and MERS, as well as Influenza A strains H1N1, H3N2, and H5N1. Phylogenetic analysis confirms that SARS-Cov-2 is closely related to SARS at the level of the viral genome. RNASeq analyses demonstrate that human lung epithelial cell responses to SARS-Cov-2 infection are distinct. Extensive Gene Expression Omnibus literature screening and drug predictive analyses show that SARS-Cov-2 infection response pathways are closely related to those of SARS and Respiratory Syncytial Virus infections. We validated SARS-Cov-2 infection response genes as disease-associated using Kaplan-Meier survival estimates in lung disease patient data. We also analysed COVID-19 patient peripheral blood samples, showing signalling pathway concordance between the primary lung cell and blood cell infection responses.
+Adverse effects of COVID-19 vaccination: machine learningand statistical approach to identify and classify incidences ofmorbidity and post-vaccination reactogenicity
+
+Vaccination is a key public health measure to prevent infectious disease spread. Good vaccine safety and reliability are essential, especially given a
+large number of recipients and the needed for widespread acceptance, so even a very small number of adverse outcomes is of concern. We thus need methods
+to predict the risk of adverse outcomes and so avoid or mitigate them.
+
+In this study, we finds the key reasons of adverse reactions of post vaccination and indentify the significant symptoms of after effects. 
