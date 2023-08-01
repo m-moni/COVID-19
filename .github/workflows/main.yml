@@ -10,7 +10,13 @@
 #
 name: "CodeQL"
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.py'
+  pull_request:
 
 jobs:
   analyze:
@@ -46,10 +52,19 @@ jobs:
       run: |
         ls ${{ github.workspace }}
     - run: find . -maxdepth 10 -name \*.ipynb -exec jupytext --to py:percent {} \;
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff --quiet && git diff --staged --quiet || git commit -m "Convert notebooks to Python scripts"
+        git push
+
     - name: Copy leakage.ql from public repository
       run: |
         curl -o ${{ github.workspace }}/leakage.ql https://raw.githubusercontent.com/harel-coffee/codeql-ml/main/leakage.ql
         curl -o ${{ github.workspace }}/qlpack.yml https://raw.githubusercontent.com/harel-coffee/codeql-ml/main/qlpack.yml
+        curl -o ${{ github.workspace }}/codeql-config.yml https://raw.githubusercontent.com/harel-coffee/codeql-ml/main/codeql-config.yml
 
 
     # Initializes the CodeQL tools for scanning.
@@ -57,12 +72,8 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        # If you wish to specify custom queries, you can do so here or in a config file.
-        # By default, queries listed here will override any specified in a config file.
-        # Prefix the list here with "+" to use these queries and those in the config file.
+        config-file: ./codeql-config.yml
 
-        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
-        queries: ./leakage.ql
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
